@@ -40,7 +40,7 @@ class CalculadoraServiceTest {
         Exception ex = assertThrows(NumberFormatException.class,()-> {
             double res = calculadoraService.calcular("/",5,0);
         });
-        assertEquals("can´t divide by zero",ex.getMessage());
+        assertEquals("can't divide by zero",ex.getMessage());
 
     }
     @Test

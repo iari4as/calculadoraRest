@@ -58,4 +58,16 @@ public class CalculadoraControllerTest {
         ResponseEntity<Object> res = this.calculadoraController.calcular(request);
         assertEquals(HttpStatus.BAD_REQUEST,res.getStatusCode());
     }
+
+    @Test
+    void calcularSumaExceptionGenerica(){
+        CalculadoraRequest request = new CalculadoraRequest();
+        request.setN1(4.0);
+        request.setN2(2.0);
+        request.setOperation("+");
+        when(calculadoraService.calcular(anyString(),anyDouble(),anyDouble())).thenThrow(new RuntimeException("Generic error message"));
+        ResponseEntity<Object> res = this.calculadoraController.calcular(request);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,res.getStatusCode());
+        assertEquals("Generic error message", res.getBody());
+    }
 }
